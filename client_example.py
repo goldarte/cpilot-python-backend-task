@@ -11,5 +11,4 @@ if enet_client.connect("localhost", 5555):
                 if parsed_data.type == Data.CommonInfo:
                     print(f"Got parsed cte: {parsed_data.data.cte}, speed: {parsed_data.data.speed}")
                 elif parsed_data.type == Data.View:
-                    print(f"Got image! {parsed_data.data.image.data}")
-        
+                    print(f"Got image! Image bytes: {parsed_data.data.image.data}")

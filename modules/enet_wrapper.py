@@ -5,7 +5,7 @@ import flatbuffers
 from dataclasses import dataclass
 
 # Agrobox modules
-from agroproto.data import DataMessage, CommonInfo, View, Image, ImageFormat
+from agroproto.data import DataMessage, CommonInfo, View, Image
 from agroproto.data.Data import Data, DataCreator
 
 logger = logging.getLogger(__name__)
@@ -61,7 +61,7 @@ class Enet():
         self._peer.send(message.type, packet)
 
     def receive_message(self):
-        event = self.get_event()        
+        event = self.get_event()
         if event.type == enet.EVENT_TYPE_CONNECT:
             logger.debug(f"CONNECT to {event.peer.address}")
             self._peer = event.peer
@@ -170,4 +170,4 @@ class AgroProto():
         data_message = DataMessage.End(builder)
         builder.Finish(data_message)
         buffer = builder.Output()
-        return Message(ChannelType.DATA, bytes(buffer))          
+        return Message(ChannelType.DATA, bytes(buffer))
