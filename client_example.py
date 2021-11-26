@@ -1,4 +1,5 @@
-from modules.enet_wrapper import EnetClient, AgroProto, Data
+from agroproto.data.ImageFormat import ImageFormat
+from modules.enet_wrapper import EnetClient, AgroProto, Data, get_property_name
 
 enet_client = EnetClient()
 
@@ -11,4 +12,6 @@ if enet_client.connect("localhost", 5555):
                 if parsed_data.type == Data.CommonInfo:
                     print(f"Got parsed cte: {parsed_data.data.cte}, speed: {parsed_data.data.speed}")
                 elif parsed_data.type == Data.View:
-                    print(f"Got image! Image bytes: {parsed_data.data.image.data}")
+                    image = parsed_data.data.image
+                    image_format = get_property_name(ImageFormat, image.format)
+                    print(f"Got {image.width}x{image.height} image in {image_format} format!")
